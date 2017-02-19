@@ -1,6 +1,7 @@
 document.addEventListener('keydown', keyPressed);
 
 var keys = document.querySelector('.keys');
+var recordedSounds = [];
 
 function keyPressed(e){
   var myDiv = document.querySelector('div[data-key="' + e.keyCode + '"]');
@@ -10,8 +11,12 @@ function keyPressed(e){
   var audio = document.querySelector('audio[data-key="' + e.keyCode + '"]');
   audio.currentTime = 0;
   audio.play();
-  //var sound = new Audio(audio);
-  //sound.play();
+
+  var newDate = new Date().getTime();
+  var newSound = {date: newDate, key: e.keyCode};
+
+  recordedSounds.push(newSound);
+  console.table(recordedSounds);
 }
 
 function removeClass(e){
