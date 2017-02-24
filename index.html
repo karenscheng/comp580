@@ -48,18 +48,20 @@
 
   <div id = "selectAndRecord" class = "keys">
     <div class = "key">
-      <button class = "recordButton">RECORD</button>
+      <button id="record" class = "recordButton">RECORD</button>
     </div>
 
-    <form class = "key">
-      <select class ="recordButton" >
-          <option>SELECT</option>
-          <option>SLOW</option>
-          <option>MEDIUM</option>
-          <option>FAST</option>
+    <span id="selectbox" class = "key">
+      <select id="select" class ="recordButton" >
+          <option value='default'>SELECT TEMPO</option>
+          <option value='80'>SLOW</option>
+          <option value='120'>MEDIUM</option>
+          <option value='140'>FAST</option>
         </select>
-    </form>
+    </span>
   </div>
+
+  <p id = "pressRecord">select a tempo before pressing record!</p>
 
   <audio data-key="65" src="sounds/clap.wav"></audio>
   <audio data-key="83" src="sounds/hihat.wav"></audio>
