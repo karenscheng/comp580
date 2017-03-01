@@ -25,13 +25,16 @@ function keyPressed(e){
     var tempo = document.getElementById("select").value;
     console.log("tempo value is: " + tempo);
 
+    var recordTime = (60/tempo)*8000;
+
     if(firstKeyPressed){
       setTimeout(function(){
         record = false;
         //call to function that takes in an array and a tempo in order to set the time stamps correctly and set firstKeyPressed to true
         quantize(recordedSounds, tempo);
+        firstKeyPressed = true;
         console.log("end timer!");
-      }, 5000); //value from selector
+      }, recordTime); //value from selector
       firstKeyPressed = false;
     }
 
@@ -94,7 +97,7 @@ function quantize(recordedSounds, tempo){
     console.log("this key plays this many milliseconds after playback starts: " + recordedSounds[j].date);
   }
 
-  playRecording(recordedSounds, 1);
+  //playRecording(recordedSounds, 1);
 }
 
 function playRecording(recordedSounds, index){
@@ -129,4 +132,8 @@ function playSound(sound, index){
   var audio = document.querySelector(audioString);
   audio.currentTime = 0;
   audio.play();
+}
+
+function loop(recordedSounds){
+
 }
