@@ -6,8 +6,8 @@ var keys = document.querySelector('.keys');
 var recordedSounds = [];
 var record = false;
 var firstKeyPressed = true;
-var playback;
 var playbackDone = false;
+var loop = false;
 
 function keyPressed(e){
   var myDiv = document.querySelector('div[data-key="' + e.keyCode + '"]');
@@ -23,9 +23,7 @@ function keyPressed(e){
   if(record){
     console.log("start timer!");
     var tempo = document.getElementById("select").value;
-    console.log("tempo value is: " + tempo);
-
-    var recordTime = (60/tempo)*8000;
+    var recordTime = getRecordTime();
 
     if(firstKeyPressed){
       setTimeout(function(){
@@ -98,9 +96,11 @@ function quantize(recordedSounds, tempo){
   }
 
   //playRecording(recordedSounds, 1);
+  loopIt(recordedSounds);
 }
 
 function playRecording(recordedSounds, index){
+  var playback;
   console.log("time to play the " + index + "sound in array");
 
   if(recordedSounds[index] === undefined){
@@ -134,6 +134,18 @@ function playSound(sound, index){
   audio.play();
 }
 
-function loop(recordedSounds){
+function loopIt(recordedSounds){
+    var recordTime = getRecordTime();
 
+    var loop = setTimeout(function() {
+      playRecording(recordedSounds, 1);
+      loopIt(recordedSounds);
+    }, recordTime);
+
+}
+
+function getRecordTime(){
+  var tempo = document.getElementById("select").value;
+  tempo = (60/tempo)*8000;
+  return tempo;
 }
